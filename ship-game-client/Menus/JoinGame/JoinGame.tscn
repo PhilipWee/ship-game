@@ -1,8 +1,11 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Menus/JoinGame/JoinGame.gd" type="Script" id=1]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -42,3 +45,5 @@ margin_right = 766.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 text = "Back To Main Menu"
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/JoinGame" to="." method="_on_JoinGame_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/BackButton" to="." method="_on_BackButton_pressed"]
