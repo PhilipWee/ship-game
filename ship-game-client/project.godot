@@ -105,7 +105,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Ship-game-client"
-run/main_scene="res://Menus/MainMenu/MainMenu.tscn"
+run/main_scene="res://Menus/Login/Login.tscn"
 config/icon="res://icon.png"
 
 [autoload]

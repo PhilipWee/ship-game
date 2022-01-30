@@ -14,10 +14,16 @@ signal session_created
 signal match_joined
 signal match_left
 signal match_players_updated
+signal logged_in
 
-func createSession():
-	var device_id = OS.get_unique_id()	
-	session = yield(client.authenticate_device_async(device_id), "completed")
+enum LOGIN_PROVIDER {
+	GOOGLE,
+	DEVICE
+}
+
+func createSession(email, password):
+	var device_id = OS.get_unique_id()
+	session = yield(client.authenticate_email_async(email,password), "completed")
 	if session.is_exception():
 		print("An error occurred: %s" % session)
 		return
@@ -47,11 +53,15 @@ func connectMatchSignal():
 
 func connectToServer():
 	createClient()
-	createSession()
+	
+
+func login(email,password):
+	createSession(email,password)
 	yield(self,"session_created")
 	createSocket()
 	yield(self,"socket_created")
 	connectMatchSignal()
+	emit_signal("logged_in")
 
 func _ready():
 	connectToServer()
