@@ -13,9 +13,9 @@ func _ready():
 	re_render()
 	
 func connect_signals():
-	connect("match_presence",Network,"_on_match_presence")
+	Network.connect("match_players_updated",self,"_on_match_players_updated")
 
-func _on_match_presence():
+func _on_match_players_updated():
 	re_render()
 	
 func _on_LeaveGame_pressed():

@@ -22,7 +22,6 @@ enum LOGIN_PROVIDER {
 }
 
 func createSession(email, password):
-	var device_id = OS.get_unique_id()
 	session = yield(client.authenticate_email_async(email,password), "completed")
 	if session.is_exception():
 		print("An error occurred: %s" % session)
@@ -78,6 +77,8 @@ func joinMatch(matchId):
 	if curMatch.is_exception():
 		print("An error occurred: %s" % curMatch)
 		return
+	for p in curMatch.presences:
+		connectedPlayers[p.user_id] = p
 	emit_signal("match_joined")
 	
 func leaveMatch(matchId):
